@@ -1,0 +1,437 @@
+*{
+  margin: 0 ;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  body {
+  height: 100vh;
+  background: radial-gradient(circle at bottom, #0b2a3a, #020509);
+  overflow: hidden;
+  position: relative;
+  }
+  
+  .night {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background-image: radial-gradient(#ffffff55 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.6;
+  background-color: rgba(255, 0, 0, 0.1);
+  z-index: 1;
+  }
+  
+  .plants {
+  position: absolute;
+  bottom: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+  }
+  
+  .plant {
+    --stem-h: 220px;
+    --delay: 0s;
+    --x: 0px;
+    --sway: 0deg;
+    transform: translateX(var(--x));
+  }
+  
+  .stem-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 6px;
+  height: 220px;
+  transform-origin: bottom;
+  animation: stemSway 6s ease-in-out infinite;
+  z-index: 6;
+  }
+  
+  .stem {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 220px;
+  background: linear-gradient(to top, #1e824c, #3cff9c);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  animation: growStem 3s ease forwards;
+  box-shadow: 0 0 10px #3cff9c;
+  z-index: 5;
+  }
+  
+  @keyframes growStem {
+  to {
+  transform: scaleY(1);
+  }
+  }
+  
+  /* bunga */
+  .flower-wrap {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: bottom center;
+  animation: flowerSway 6s ease-in-out infinite;
+  z-index: 7;
+  }
+  
+  .flower {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  transform: scale(0);
+  animation: bloom 1.5s ease forwards;
+  animation-delay: 3s;
+  z-index: 8;
+  }
+  
+  /* kelopak */
+  .flower span {
+  position: absolute;
+  inset: 0;
+  background: #7fffd4;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 10px #7fffd4);
+  }
+  
+  /* posisi kelopak */
+  .flower span:nth-child(1) { transform: rotate(0deg) translateY(-22px); }
+  .flower span:nth-child(2) { transform: rotate(72deg) translateY(-22px); }
+  .flower span:nth-child(3) { transform: rotate(144deg) translateY(-22px); }
+  .flower span:nth-child(4) { transform: rotate(216deg) translateY(-22px); }
+  .flower span:nth-child(5) { transform: rotate(288deg) translateY(-22px); }
+  
+  /* animasi mekar */
+  @keyframes bloom {
+  to {
+  transform: scale(1);
+  }
+  }
+  
+  .center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #fff3a0, #f1c40f);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px #f1c40f;
+  }
+  /* wadah daun */
+  .leaf {
+  position: absolute;
+  bottom: 110px;
+  width: 50px;
+  height: 14px;
+  transform-origin: left center;
+  animation: leafAppear 1.5s ease forwards;
+  animation-delay: 2s;
+  z-index: 6;
+  }
+  /* posisi nempel batang */
+  .leaf.left {
+  left: 60%;
+  transform: translateX(-6px) scale(0);
+  }
+  .leaf.right {
+  left: 60%;
+  transform: translateX(6px) scale(0);
+  }
+  /* bentuk daun */
+  .leaf-shape {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #1e824c, #3cff9c);
+  border-radius: 0 100% 100% 0;
+  transform-origin: left center;
+  animation: leafSway 4s ease-in-out infinite;
+  box-shadow: 0 0 8px #3cff9c;
+  }
+  /* arah daun */
+  .leaf.left .leaf-shape {
+  transform: rotate(-35deg);
+  }
+  .leaf.right .leaf-shape {
+  transform: rotate(-35deg) scaleX(-1);
+  }
+  /* animasi tumbuh daun */
+  @keyframes leafAppear {
+  to {
+  transform: translateX(var(--shift)) scale(1);
+  }
+  }
+  .leaf.left { --shift: -6px; }
+  .leaf.right { --shift: 6px; }
+  
+  /* animasi angin */
+  @keyframes leafSway {
+  0%, 100% {
+  transform: rotate(var(--angle));
+  }
+  50% {
+  transform: rotate(calc(var(--angle) + 6deg));
+  }
+  }
+  .leaf.left .leaf-shape { --angle: -35deg; }
+  .leaf.right .leaf-shape { --angle: 35deg; }
+  @keyframes stemSway {
+  0%, 100% {
+  transform: translateX(-50%) rotate(-0.8deg);
+  }
+  50% {
+  transform: translateX(-50%) rotate(1deg);
+  }
+  }
+  @keyframes flowerSway {
+  0%, 100% {
+  transform: translateX(-50%) rotate(-3deg);
+  }
+  50% {
+  transform: translateX(-50%) rotate(4deg);
+  }
+  }
+  
+  .particles {
+      position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 4; /* di atas night, di bawah tanaman */
+  }
+  
+  .particles span {
+  position: absolute;
+  bottom: -20px;
+  width: 4px;
+  height: 4px;
+  background: rgba(150, 255, 255, 0.9);
+  border-radius: 50%;
+  filter: blur(0.5px);
+  box-shadow: 0 0 10px rgba(150, 255, 255, 0.8);
+  animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+  from {
+  transform: translateY(0) scale(1);
+  opacity: 0;
+  }
+  10% {
+  opacity: 1;
+  }
+  to {
+  transform: translateY(-110vh) scale(0.6);
+  opacity: 0;
+  }
+  }
+  .particles span:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+  .particles span:nth-child(2) { left: 20%; animation-duration: 9s; animation-delay: 2s; }
+  .particles span:nth-child(3) { left: 30%; animation-duration: 11s; animation-delay: 4s; }
+  .particles span:nth-child(4) { left: 40%; animation-duration: 8s; animation-delay: 1s; }
+  .particles span:nth-child(5) { left: 50%; animation-duration: 13s; animation-delay: 3s; }
+  .particles span:nth-child(6) { left: 60%; animation-duration: 10s; animation-delay: 5s; }
+  .particles span:nth-child(7) { left: 70%; animation-duration: 14s; animation-delay: 2s; }
+  .particles span:nth-child(8) { left: 80%; animation-duration: 9s; animation-delay: 6s; }
+  .particles span:nth-child(9) { left: 90%; animation-duration: 12s; animation-delay: 4s; }
+  .particles span:nth-child(10) { left: 15%; animation-duration: 11s; animation-delay: 7s; }
+  .particles span:nth-child(11) { left: 25%; animation-duration: 8s; animation-delay: 5s; }
+  .particles span:nth-child(12) { left: 35%; animation-duration: 13s; animation-delay: 6s; }
+  .particles span:nth-child(13) { left: 55%; animation-duration: 10s; animation-delay: 8s; }
+  .particles span:nth-child(14) { left: 75%; animation-duration: 12s; animation-delay: 7s; }
+  .particles span:nth-child(15) { left: 85%; animation-duration: 9s; animation-delay: 9s; }
+  
+  /* ===== SCREEN AWAL ===== */
+  #welcome {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at bottom, #0b2a3a, #020509);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    cursor: pointer;
+  }
+  
+    #welcome h1 {
+    font-size: clamp(2.2rem, 8vw, 4rem);
+    color: #7fffd4;
+    text-shadow: 0 0 20px #7fffd4;
+    text-align: center;
+  }
+  
+  #welcome p {
+    margin-top: 25px;
+    letter-spacing: 4px;
+    color: #ffffffaa;
+  }
+  
+  #welcome.fade {
+    animation: fadeOut 1.2s ease forwards;
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: scale(1.1);
+    }
+  }
+  
+  /* sembunyiin tanaman */
+  .hidden {
+    display: none;
+  }
+  
+  /* wadah */
+  .cinematic {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9;
+  }
+  
+  /* teks */
+  .cinematic .text {
+    font-size: clamp(1.2rem, 5vw, 2.2rem);
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    color: #eafcff;
+    opacity: 0;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(150,255,255,.8);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    max-width: 80%;
+  }
+  
+  .cinematic .text.show {
+    opacity: 1;
+    transform: translate(-50%, -20%);
+  }
+  
+  /* kunang-kunang */
+  .firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #fffacd, #ffd700);
+    border-radius: 50%;
+    box-shadow: 0 0 12px #ffd700;
+    animation: fly linear infinite;
+    opacity: 0.8;
+  }
+  
+  @keyframes fly {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(var(--x), var(--y));
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .firefly {
+      width: 4px;
+      height: 4px;
+      box-shadow: 0 0 8px #ffd700;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cinematic .text {
+      top: 34%;
+      font-size: clamp(1rem, 4.5vw, 1.6rem);
+      line-height: 1.6;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .plants {
+      bottom: 30px;
+      transform: scale(0.85);
+    }
+  
+    .flower-wrap {
+      bottom: 180px;
+    }
+  
+    .stem {
+      height: 180px;
+    }
+  
+    .stem-wrap {
+      height: 180px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .particles span {
+      opacity: 0.6;
+    }
+  }
+  
+  .plant {
+    animation: breathe 4s ease-in-out infinite;
+  }
+  
+  @keyframes breathe {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  .love {
+    position: absolute;
+    top: -30px;
+    color: #ff5fa2;
+    animation: fall linear forwards;
+    text-shadow: 0 0 10px rgba(255,100,180,.8);
+  }
+  
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+
+
+  .particles {
+    position: absolute;
+    top: 32vh;          /* ⬅️ mulai DI BAWAH aurora */
+    left: 0;
+    width: 100%;
+    height: 68vh;
+    z-index: 3;
+    pointer-events: none;
+  }
+  
+  .aurora-sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 32vh;
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  /* CANVAS AURORA */
+  #aurora {
+    position: absolute;
+    top: -3vh;          /* ⬅️ NAIKIN AURORA */
+    left: 0;
+    width: 100%;
+    height: 32vh;
+    z-index: 2;
+    pointer-events: none;
+  }

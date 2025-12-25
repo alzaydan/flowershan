@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Growing Flower</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ====== SCREEN AWAL ====== -->
+  <div id="welcome">
+    <h1>HALO SAYANG</h1>
+    <p>CLICK ANYWHERE</p>
+  </div>
+
+
+  <!-- bintang / night -->
+  <div class="night"></div>
+
+  <div class="aurora-sky">
+    <span></span>
+    <span></span>
+  </div>
+  <canvas id="aurora"></canvas>
+
+  <!-- partikel cahaya background -->
+  <div class="particles">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- ====== TANAMAN (DISEMBUNYIKAN DULU) ====== -->
+  <div class="plants hidden">
+    <div class="plant">
+
+      <!-- batang -->
+      <div class="stem-wrap">
+        <div class="stem"></div>
+      </div>
+
+      <!-- daun kiri -->
+      <div class="leaf left">
+        <div class="leaf-shape"></div>
+      </div>
+
+      <!-- daun kanan -->
+      <div class="leaf right">
+        <div class="leaf-shape"></div>
+      </div>
+
+      <!-- bunga -->
+      <div class="flower-wrap">
+        <div class="flower">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <div class="center"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====== SCRIPT KLIK ====== -->
+  <script>
+    const welcome = document.getElementById("welcome");
+    const plants = document.querySelector(".plants");
+
+    welcome.addEventListener("click", () => {
+      welcome.classList.add("fade");
+
+      setTimeout(() => {
+        welcome.style.display = "none";
+        plants.classList.remove("hidden");
+      }, 1200);
+    });
+  </script>
+
+  <!-- CINEMATIC -->
+  <div class="cinematic">
+    <div class="text"></div>
+    <div class="fireflies"></div>
+  
+    <!-- HUJAN CINTA -->
+    <div class="love-rain"></div>
+
+  </div>
+
+  <script type="module" src="script.js"></script>
+<audio id="bgm" src="sound/bgm.mp3" loop></audio>
+
+</body>
+
+</html>
